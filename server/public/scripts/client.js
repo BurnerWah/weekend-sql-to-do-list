@@ -39,7 +39,7 @@ function createTodoItem(todo) {
   // in retrospect using addEventListener makes this unnecessary
   li.setAttribute('data-id', todo.id)
   if (todo.isComplete) {
-    li.classList.add('complete')
+    li.classList.add('completed')
   }
 
   const text = document.createElement('span')
