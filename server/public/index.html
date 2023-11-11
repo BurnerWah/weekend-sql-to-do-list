@@ -17,8 +17,13 @@
         <h2>Add a Task</h2>
         <form>
           <label for="task">Task</label>
-          <input type="text" name="text" id="task" />
-          <button type="submit">Add Task</button>
+          <input
+            type="text"
+            name="text"
+            id="task"
+            data-testid="toDoTextInput"
+          />
+          <button type="submit" data-testid="submitButton">Add Task</button>
         </form>
       </section>
       <section>
