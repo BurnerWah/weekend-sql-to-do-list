@@ -36,6 +36,7 @@ function renderTodos(todos) {
 function createTodoItem(todo) {
   const li = document.createElement('li')
   li.setAttribute('data-testid', 'toDoItem')
+  // in retrospect using addEventListener makes this unnecessary
   li.setAttribute('data-id', todo.id)
 
   const text = document.createElement('span')
@@ -51,7 +52,14 @@ function createTodoItem(todo) {
   const deleteButton = document.createElement('button')
   deleteButton.setAttribute('data-testid', 'deleteButton')
   deleteButton.textContent = 'Delete'
-  // TODO: Add event listener to delete todo item
+  deleteButton.addEventListener('click', async (e) => {
+    try {
+      await axios({ method: 'DELETE', url: `/todos/${todo.id}` })
+      getTodos()
+    } catch (err) {
+      console.error('Error on DELETE /todos', err)
+    }
+  })
   li.appendChild(deleteButton)
 
   return li
