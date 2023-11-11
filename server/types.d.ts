@@ -3,3 +3,7 @@ interface TodoServerItem {
   text: string
   isComplete: boolean
 }
+
+interface TodoClientAddItem {
+  text: string
+}
