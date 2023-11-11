@@ -38,6 +38,9 @@ function createTodoItem(todo) {
   li.setAttribute('data-testid', 'toDoItem')
   // in retrospect using addEventListener makes this unnecessary
   li.setAttribute('data-id', todo.id)
+  if (todo.isComplete) {
+    li.classList.add('complete')
+  }
 
   const text = document.createElement('span')
   text.textContent = todo.text
@@ -46,7 +49,17 @@ function createTodoItem(todo) {
   const completeButton = document.createElement('button')
   completeButton.setAttribute('data-testid', 'completeButton')
   completeButton.textContent = 'Complete'
-  // TODO: Add event listener to complete todo item
+  completeButton.addEventListener('click', async (e) => {
+    try {
+      await axios({ method: 'PUT', url: `/todos/${todo.id}` })
+      getTodos()
+    } catch (err) {
+      console.error('Error on PUT /todos', err)
+    }
+  })
+  if (todo.isComplete) {
+    completeButton.setAttribute('disabled', 'true')
+  }
   li.appendChild(completeButton)
 
   const deleteButton = document.createElement('button')
