@@ -57,4 +57,32 @@ function createTodoItem(todo) {
   return li
 }
 
+/** @type {HTMLFormElement} */
+const form = document.querySelector('form#addTask')
+form.addEventListener('submit', (event) => {
+  event.preventDefault()
+  const formData = new FormData(form)
+  const text = formData.get('text')
+  addTodo(text)
+})
+
+/**
+ * Adds a to do item to the database and refreshes the DOM
+ * @param {string} text
+ */
+async function addTodo(text) {
+  try {
+    await axios({
+      method: 'POST',
+      url: '/todos',
+      data: {
+        text,
+      },
+    })
+    getTodos()
+  } catch (err) {
+    console.error('Error on POST /todos', err)
+  }
+}
+
 getTodos()
