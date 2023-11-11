@@ -44,4 +44,23 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
+router.put('/:id', async (req, res) => {
+  const { id } = req.params
+  try {
+    const result = await pool.query(
+      /*sql*/ `
+        UPDATE "todos"
+        SET "isComplete" = NOT "isComplete"
+        WHERE "id" = $1;
+      `,
+      [id],
+    )
+    console.log(result)
+    res.sendStatus(200)
+  } catch (err) {
+    console.error('Error executing query', err)
+    res.sendStatus(500)
+  }
+})
+
 module.exports = router
