@@ -39,15 +39,21 @@ function createTodoItem(todo) {
   // in retrospect using addEventListener makes this unnecessary
   li.setAttribute('data-id', todo.id)
   if (todo.isComplete) {
-    li.classList.add('completed')
+    li.classList.add('completed', 'disabled')
+    li.setAttribute('aria-disabled', 'true')
   }
+  li.classList.add('list-group-item')
 
   const text = document.createElement('span')
-  text.textContent = todo.text
+  text.textContent = `${todo.text} `
   li.appendChild(text)
+
+  const buttonGroup = document.createElement('div')
+  buttonGroup.classList.add('btn-group')
 
   const completeButton = document.createElement('button')
   completeButton.setAttribute('data-testid', 'completeButton')
+  completeButton.classList.add('btn', 'btn-success')
   completeButton.textContent = 'Complete'
   completeButton.addEventListener('click', async (e) => {
     try {
@@ -60,10 +66,12 @@ function createTodoItem(todo) {
   if (todo.isComplete) {
     completeButton.setAttribute('disabled', 'true')
   }
-  li.appendChild(completeButton)
+  buttonGroup.appendChild(completeButton)
+  // li.appendChild(completeButton)
 
   const deleteButton = document.createElement('button')
   deleteButton.setAttribute('data-testid', 'deleteButton')
+  deleteButton.classList.add('btn', 'btn-danger')
   deleteButton.textContent = 'Delete'
   deleteButton.addEventListener('click', async (e) => {
     try {
@@ -73,7 +81,10 @@ function createTodoItem(todo) {
       console.error('Error on DELETE /todos', err)
     }
   })
-  li.appendChild(deleteButton)
+  buttonGroup.appendChild(deleteButton)
+  // li.appendChild(deleteButton)
+
+  li.appendChild(buttonGroup)
 
   return li
 }
