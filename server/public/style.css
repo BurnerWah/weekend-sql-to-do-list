@@ -1,0 +1,18 @@
+body,
+main {
+  width: 80%;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+header {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+.completed::before {
+  content: '✓ ';
+}

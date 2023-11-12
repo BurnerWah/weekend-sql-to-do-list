@@ -21,7 +21,7 @@
     ></script>
     <title>SQL TO-DO List</title>
   </head>
-  <body>
+  <body class="bg-light">
     <header>
       <h1>SQL TO-DO List</h1>
     </header>
@@ -29,14 +29,23 @@
       <section>
         <h2>Add a Task</h2>
         <form id="addTask">
-          <label for="task">Task</label>
-          <input
-            type="text"
-            name="text"
-            id="task"
-            data-testid="toDoTextInput"
-          />
-          <button type="submit" data-testid="submitButton">Add Task</button>
+          <div class="input-group mb-3 flex-nowrap">
+            <label for="task" class="form-label">Task</label>
+            <input
+              type="text"
+              name="text"
+              id="task"
+              data-testid="toDoTextInput"
+              class="form-control"
+            />
+          </div>
+          <button
+            type="submit"
+            data-testid="submitButton"
+            class="btn btn-primary"
+          >
+            Add Task
+          </button>
         </form>
       </section>
       <section>
